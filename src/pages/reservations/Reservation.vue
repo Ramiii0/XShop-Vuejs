@@ -1,24 +1,24 @@
 <script lang="ts" setup>
-import { useTickets } from '@/composables/useTicket'
-import type { Ticket } from '@/types/tickets/ticket'
-import { onMounted, ref } from 'vue'
-import CreateTicket from './CreateTicket.vue'
-import UpdateTicket from './UpdateTicket.vue'
+import { onMounted, reactive, ref } from 'vue'
+import CreateReservation from '@/components/reservations/CreateReservation.vue'
+import UpdateReservation from '@/components/reservations/UpdateReservation.vue'
+import { useReservations } from '@/composables/useReservation'
+import type { Reservation } from '@/types/reservations/reservation'
 
-const { tickets, loading, error, getList, remove } = useTickets()
-console.log('tickets', tickets)
-
+const { reservations, loading, error, getList, remove } = useReservations()
+console.log('reservations', reservations)
 const createDialog = ref(false)
+
 const openCreateDialog = () => { createDialog.value = true }
 
 const updateDialog = ref(false)
-const selectedTicket = ref<Ticket | null>(null)
-const openUpdateDialog = (ticket: Ticket) => {
-  selectedTicket.value = ticket
+const selectedReservation = ref<Reservation | null>(null)
+const openUpdateDialog = (reservation: Reservation) => {
+  selectedReservation.value = reservation
   updateDialog.value = true
 }
 
-const handleTicketChange = async () => {
+const handleReservationChange = async () => {
   await getList()
 }
 
@@ -33,16 +33,16 @@ onMounted(() => {
 <v-container fluid>
     <v-row class="align-center pb-4">
         <v-col>
-            <v-btn @click="openCreateDialog">Add new ticket</v-btn>
-        <CreateTicket
+            <v-btn @click="openCreateDialog">Add reservation</v-btn>
+        <CreateReservation
         v-if="createDialog"
          v-model:dialog="createDialog"
-         @ticket-created="handleTicketChange" />
-        <UpdateTicket 
-          v-if="updateDialog && selectedTicket"
+         @reservation-created="handleReservationChange" />
+        <UpdateReservation 
+          v-if="updateDialog && selectedReservation"
           v-model:dialog="updateDialog"
-          :ticketData="selectedTicket"
-          @ticket-updated="handleTicketChange"
+          :reservationData="selectedReservation"
+          @reservation-updated="handleReservationChange"
         />
         </v-col>
            <v-spacer></v-spacer>
@@ -63,16 +63,10 @@ onMounted(() => {
           Id
         </th>
         <th class="text-left">
-          Name
+          TicketId
         </th>
          <th class="text-left">
-          Time
-        </th>
-         <th class="text-left">
-          Destination
-        </th>
-        <th class="text-left">
-          Description
+          UserId
         </th>
         <th class="text-left">
           Crud
@@ -81,14 +75,12 @@ onMounted(() => {
     </thead>
     <tbody>
       <tr
-        v-for="item in tickets"
-        :key="item.name"
+        v-for="item in reservations"
+        :key="item.id"
       >
        <td>{{ item.id }}</td>
-       <td>{{ item.name }}</td>
-        <td>{{ item.time }}</td>
-        <td>{{ item.description }}</td>
-        <td>{{ item.destination }}</td>
+       <td>{{ item.ticketId }}</td>
+       <td>{{ item.userId }}</td>
 
         <td>
           <v-btn color="primary" variant="text" @click="openUpdateDialog(item)">Edit</v-btn>

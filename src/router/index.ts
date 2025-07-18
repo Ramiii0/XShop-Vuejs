@@ -7,6 +7,8 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import Home from '@/pages/Home.vue'
+import Ticket from '@/pages/tickets/Ticket.vue'
+import Reservation from '@/pages/reservations/Reservation.vue'
 import { APP_ROUTE_NAMES } from '@/constants/routeNames'
 
 const router = createRouter({
@@ -14,8 +16,18 @@ const router = createRouter({
   routes : [
     {
       path: '/',
-      name: APP_ROUTE_NAMES.HOME,
-      component: Home,
+      name: 'home',
+      component: Ticket,
+    },
+    {
+      path: '/tickets',
+      name: 'tickets',
+      component: Ticket,
+    },
+    {
+      path: '/reservations',
+      name: 'reservations',
+      component: Reservation,
     }
   ]
 })

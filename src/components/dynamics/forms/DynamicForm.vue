@@ -4,9 +4,10 @@ import { defineProps, defineEmits } from 'vue';
 export interface Field {
   label: string;
   key: string;
-  type: 'text' | 'number' | 'email' | 'date' | 'textarea';
+  type: 'text' | 'number' | 'email' | 'date' | 'textarea' | 'select';
   placeholder?: string;
   counter?: number;
+  options?: Array<{ label: string; value: string | number }>;
 }
 
 const props = defineProps<{
@@ -33,9 +34,29 @@ function handleSubmit() {
   <form @submit.prevent="handleSubmit">
     <div v-for="field in schema" :key="field.key" class="mb-4">
       <v-text-field
+        v-if="field.type !== 'select' && field.type !== 'textarea'"
         v-model="props.modelValue[field.key]"
         :label="field.label"
         :type="field.type"
+        :placeholder="field.placeholder || ''"
+        @update:model-value="(value) => updateField(field.key, value)"
+      />
+      
+      <v-textarea
+        v-else-if="field.type === 'textarea'"
+        v-model="props.modelValue[field.key]"
+        :label="field.label"
+        :placeholder="field.placeholder || ''"
+        @update:model-value="(value) => updateField(field.key, value)"
+      />
+      
+      <v-select
+        v-else-if="field.type === 'select'"
+        v-model="props.modelValue[field.key]"
+        :label="field.label"
+        :items="field.options"
+        item-title="label"
+        item-value="value"
         :placeholder="field.placeholder || ''"
         @update:model-value="(value) => updateField(field.key, value)"
       />

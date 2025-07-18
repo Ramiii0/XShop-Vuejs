@@ -1,0 +1,40 @@
+{
+  "tickets": [
+    {
+      "name": "rami",
+      "description": "sssssssssssssssssdad",
+      "destination": "asf",
+      "time": "2025-07-16T00:00:00.000Z",
+      "id": "dca1"
+    },
+    {
+      "id": "ac74",
+      "name": "ds",
+      "description": "d",
+      "destination": "d",
+      "time": "2025-07-09T00:00:00.000Z"
+    }
+  ],
+  "reservations": [
+    {
+      "ticketId": null,
+      "userId": "1",
+      "id": "3699"
+    },
+    {
+      "id": "5468",
+      "ticketId": "dca1",
+      "userId": "3"
+    },
+    {
+      "id": "1e79",
+      "ticketId": "dca1",
+      "userId": "1"
+    },
+    {
+      "id": "7889",
+      "ticketId": "dca1",
+      "userId": "2"
+    }
+  ]
+}

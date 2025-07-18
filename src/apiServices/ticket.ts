@@ -3,8 +3,12 @@ import api from './axios';
 import type { Ticket } from '@/types/tickets/ticket';
 import type { CreateTicket } from '@/types/tickets/createTicket';
 
-export function fetchTickets() : Promise<{ data: Ticket[] }> {
-  return api.get('/tickets');
+export function fetchTickets(name : string | null = null) : Promise<{ data: Ticket[] }> {
+  return api.get('/tickets', {
+    params: {
+      name
+    }
+  });
 }
 
 export function fetchTicket(id : string) : Promise<{ data: Ticket }> {

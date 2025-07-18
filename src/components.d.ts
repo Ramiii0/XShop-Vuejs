@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CreateForm: typeof import('./components/CreateForm.vue')['default']
+    CreateReservation: typeof import('./components/reservations/CreateReservation.vue')['default']
     CreateTicket: typeof import('./components/tickets/CreateTicket.vue')['default']
     DynamicForm: typeof import('./components/dynamics/forms/DynamicForm.vue')['default']
     DynamicTicketForm: typeof import('./components/tickets/DynamicTicketForm.vue')['default']
@@ -20,6 +21,7 @@ declare module 'vue' {
     TestDynamic: typeof import('./components/tickets/testDynamic.vue')['default']
     TestDynamicTicket: typeof import('./components/tickets/testDynamicTicket.vue')['default']
     Ticket: typeof import('./components/tickets/Ticket.vue')['default']
+    UpdateReservation: typeof import('./components/reservations/UpdateReservation.vue')['default']
     UpdateTicket: typeof import('./components/tickets/UpdateTicket.vue')['default']
   }
 }
