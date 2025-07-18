@@ -18,3 +18,7 @@ export function createTicket(data: CreateTicket) : Promise<{ data: Ticket }> {
 export function deleteTicket(id: string) {
   return api.delete(`/tickets/${id}`);
 }
+
+export function updateTicket(id: string, data: Partial<Ticket>) : Promise<{ data: Ticket }> {
+  return api.put(`/tickets/${id}`, data);
+}

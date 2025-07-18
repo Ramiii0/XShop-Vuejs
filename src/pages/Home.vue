@@ -1,0 +1,3 @@
+<template>
+          <Ticket></Ticket>
+</template>

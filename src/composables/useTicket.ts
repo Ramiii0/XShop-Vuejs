@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import * as ticketApi from '@/apiServices/ticket';
 import type { Ticket } from '@/types/tickets/ticket';
 import type { CreateTicket } from '@/types/tickets/createTicket';
+import type { UpdateTicket } from '@/types/tickets/updateTicket';
 
 // Composable for listing, creating, and deleting tickets
 export function useTickets() {
@@ -69,6 +70,21 @@ export function useTickets() {
     }
   }
 
+  async function update(id: string, payload: UpdateTicket) {
+    loading.value = true;
+    error.value = null;
+    try {
+      await ticketApi.updateTicket(id, payload);
+      await getList();
+    } catch (err: unknown) {
+      error.value = err as Error;
+    } finally {
+      loading.value = false;
+    }
+  }
+
+
+
   return {
     tickets,
     loading,
@@ -76,6 +92,7 @@ export function useTickets() {
     getList,
     create,
     remove,
-    get
+    get,
+    update
   };
 }

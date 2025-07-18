@@ -26,7 +26,9 @@ loading.value = true;
     <v-row class="align-center pb-4">
         <v-col>
             <v-btn @click="openCreateDialog">Add new ticket</v-btn>
-        <CreateTicket v-model:dialog="createDialog" />
+        <CreateTicket
+        v-if="createDialog"
+         v-model:dialog="createDialog" />
         <UpdateTicket 
           v-if="updateDialog && selectedTicket"
           v-model:dialog="updateDialog"
