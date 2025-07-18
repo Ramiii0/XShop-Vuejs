@@ -1,10 +1,18 @@
 <script lang="ts" setup>
 import { useTickets } from '@/composables/useTicket';
+import type { Ticket } from '@/types/tickets/ticket';
 import { onMounted,ref } from 'vue';
-const { tickets, loading, error, getList, create, remove, get } = useTickets();
+const { tickets, loading, error, getList, remove } = useTickets();
 console.log('tickets', tickets);
-const dialog = ref(false)
-const openDialog = () => { dialog.value = true }
+const createDialog = ref(false)
+const openCreateDialog = () => { createDialog.value = true }
+
+const updateDialog = ref(false)
+const selectedTicket = ref<Ticket | null>(null)
+const openUpdateDialog = (ticket: Ticket) => {
+  selectedTicket.value = ticket;
+  updateDialog.value = true;
+}
 
 loading.value = true;
 
@@ -17,8 +25,13 @@ loading.value = true;
 <v-container fluid>
     <v-row class="align-center pb-4">
         <v-col>
-            <v-btn @click="openDialog">Add new ticket</v-btn>
-        <CreateTicket v-model:dialog="dialog" />
+            <v-btn @click="openCreateDialog">Add new ticket</v-btn>
+        <CreateTicket v-model:dialog="createDialog" />
+        <UpdateTicket 
+          v-if="updateDialog && selectedTicket"
+          v-model:dialog="updateDialog"
+          :ticketData="selectedTicket"
+        />
         </v-col>
            <v-spacer></v-spacer>
            <v-col>
@@ -66,8 +79,8 @@ loading.value = true;
         <td>{{ item.destination }}</td>
 
         <td>
-          <v-btn color="primary" variant="text">Edit</v-btn>
-          <v-btn color="error" variant="text">Delete</v-btn>
+          <v-btn color="primary" variant="text" @click="openUpdateDialog(item)">Edit</v-btn>
+          <v-btn color="error" variant="text" @click="remove(item.id)">Delete</v-btn>
         </td>
 
       </tr>
