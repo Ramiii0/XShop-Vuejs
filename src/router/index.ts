@@ -6,7 +6,6 @@
 
 // Composables
 import { createRouter, createWebHistory } from 'vue-router/auto'
-import { routes } from 'vue-router/auto-routes'
 import Home from '@/pages/Home.vue'
 import { APP_ROUTE_NAMES } from '@/constants/routeNames'
 
