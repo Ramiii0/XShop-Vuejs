@@ -8,10 +8,18 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CreateForm: typeof import('./components/CreateForm.vue')['default']
+    CreateTicket: typeof import('./components/tickets/CreateTicket.vue')['default']
+    DynamicForm: typeof import('./components/dynamics/forms/DynamicForm.vue')['default']
+    DynamicTicketForm: typeof import('./components/tickets/DynamicTicketForm.vue')['default']
     Footer: typeof import('./components/layouts/Footer.vue')['default']
     Header: typeof import('./components/layouts/Header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Ticket: typeof import('./components/tickets/ticket.vue')['default']
+    SearchInputField: typeof import('./components/SearchInputField.vue')['default']
+    TestDynamic: typeof import('./components/tickets/testDynamic.vue')['default']
+    TestDynamicTicket: typeof import('./components/tickets/testDynamicTicket.vue')['default']
+    Ticket: typeof import('./components/tickets/Ticket.vue')['default']
+    UpdateTicket: typeof import('./components/tickets/UpdateTicket.vue')['default']
   }
 }
