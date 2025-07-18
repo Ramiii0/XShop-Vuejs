@@ -1,15 +1,17 @@
 // src/composables/useTickets.js
-import { ref } from 'vue';
-import * as ticketApi from '@/apiServices/ticket';
-import type { Ticket } from '@/types/tickets/ticket';
-import type { CreateTicket } from '@/types/tickets/createTicket';
-import type { UpdateTicket } from '@/types/tickets/updateTicket';
+import { ref } from 'vue'
+import * as ticketApi from '@/apiServices/ticket'
+import type { Ticket } from '@/types/tickets/ticket'
+import type { CreateTicket } from '@/types/tickets/createTicket'
+import type { UpdateTicket } from '@/types/tickets/updateTicket'
+
+// Global state - shared across all components
+const tickets = ref<Ticket[]>([])
+const loading = ref(false)
+const error = ref<Error | null>(null)
 
 // Composable for listing, creating, and deleting tickets
 export function useTickets() {
-  const tickets = ref<Ticket[]>([]);
-  const loading = ref(false);
-  const error = ref<Error | null>(null);
 
   // Load the full list of tickets
   async function getList() {
@@ -94,5 +96,5 @@ export function useTickets() {
     remove,
     get,
     update
-  };
+  }
 }

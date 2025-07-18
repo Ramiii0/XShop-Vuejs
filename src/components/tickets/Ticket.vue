@@ -1,24 +1,32 @@
 <script lang="ts" setup>
-import { useTickets } from '@/composables/useTicket';
-import type { Ticket } from '@/types/tickets/ticket';
-import { onMounted,ref } from 'vue';
-const { tickets, loading, error, getList, remove } = useTickets();
-console.log('tickets', tickets);
+import { useTickets } from '@/composables/useTicket'
+import type { Ticket } from '@/types/tickets/ticket'
+import { onMounted, ref } from 'vue'
+import CreateTicket from './CreateTicket.vue'
+import UpdateTicket from './UpdateTicket.vue'
+
+const { tickets, loading, error, getList, remove } = useTickets()
+console.log('tickets', tickets)
+
 const createDialog = ref(false)
 const openCreateDialog = () => { createDialog.value = true }
 
 const updateDialog = ref(false)
 const selectedTicket = ref<Ticket | null>(null)
 const openUpdateDialog = (ticket: Ticket) => {
-  selectedTicket.value = ticket;
-  updateDialog.value = true;
+  selectedTicket.value = ticket
+  updateDialog.value = true
 }
 
-loading.value = true;
+const handleTicketChange = async () => {
+  await getList()
+}
 
-   onMounted(() => {
-    getList()
-});
+loading.value = true
+
+onMounted(() => {
+  getList()
+})
 </script>
 
 <template>
@@ -28,11 +36,13 @@ loading.value = true;
             <v-btn @click="openCreateDialog">Add new ticket</v-btn>
         <CreateTicket
         v-if="createDialog"
-         v-model:dialog="createDialog" />
+         v-model:dialog="createDialog"
+         @ticket-created="handleTicketChange" />
         <UpdateTicket 
           v-if="updateDialog && selectedTicket"
           v-model:dialog="updateDialog"
           :ticketData="selectedTicket"
+          @ticket-updated="handleTicketChange"
         />
         </v-col>
            <v-spacer></v-spacer>
