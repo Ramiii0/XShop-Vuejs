@@ -71,7 +71,7 @@ async function saveTicket() {
   >
     <v-card>
       <v-card-title class="d-flex align-center justify-space-between">
-        <span>Use Google's location service?</span>
+        <span>Create Ticket</span>
         <v-btn icon @click="closeDialog">
           <v-icon>mdi-close</v-icon>
         </v-btn>
