@@ -46,7 +46,7 @@ const ticket = ref({
   time: ''
 });
 
-function getCreatePayload() : CreateTicket {
+function getTicketPayload() : CreateTicket {
   return {
     name: ticket.value.name || '',
     description: ticket.value.description || '',
@@ -56,8 +56,8 @@ function getCreatePayload() : CreateTicket {
 }
 async function saveTicket() {
 
-  await create(getCreatePayload());
-  console.log('Ticket saved:', getCreatePayload());
+  await create(getTicketPayload());
+  console.log('Ticket saved:', getTicketPayload());
   closeDialog();
   router.push({ name: APP_ROUTE_NAMES.HOME });
 }
