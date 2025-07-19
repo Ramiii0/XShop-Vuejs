@@ -1,17 +1,23 @@
 // src/composables/useReservations.js
-import { ref } from 'vue'
+import { computed, ref, reactive } from 'vue'
 import * as reservationApi from '@/apiServices/reservation'
 import type { Reservation } from '@/types/reservations/reservation'
 import type { CreateReservation } from '@/types/reservations/createReservation'
 import type { UpdateReservation } from '@/types/reservations/updateReservation'
+import { useUserStore } from '@/stores/userStore'
 
 // Global state - shared across all components
 const reservations = ref<Reservation[]>([])
 const loading = ref(false)
 const error = ref<Error | null>(null)
 
+function getReservationsCount() {
+  return computed(() => reservations.value.filter(reservation => reservation.userId === useUserStore().user.id).length)
+}
+
 // Composable for listing, creating, and deleting reservations
 export function useReservations() {
+  const userStore = useUserStore()
 
   // Load the full list of reservations
   async function getList() {
@@ -51,6 +57,7 @@ export function useReservations() {
     try {
       await reservationApi.createReservation(payload);
       await getList();
+      userStore.updateUserTicketCount(getReservationsCount().value);
     } catch (err: unknown) {
       error.value = err as Error;
     } finally {
@@ -65,6 +72,8 @@ export function useReservations() {
     try {
       await reservationApi.deleteReservation(id);
       await getList();
+      // Update user ticket count after deleting reservation
+      userStore.updateUserTicketCount(getReservationsCount().value);
     } catch (err: unknown) {
       error.value = err as Error;
     } finally {
@@ -98,3 +107,5 @@ export function useReservations() {
     update
   }
 }
+// (removed custom reactive stub, now using Vue's built-in reactive)
+

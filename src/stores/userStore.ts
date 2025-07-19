@@ -8,9 +8,20 @@ import type { Reservation } from "@/types/reservations/reservation"
 
 export const useUserStore = defineStore('user', () => {
     const { reservations, getList } = useReservations()
-    getList()
   let currentUser = reactive<User>(users[0])
-  let userTicketCount = computed(() => currentUser.noOfTickets)
+  let userTicketCount = ref(0)
 
-  return { user: currentUser, userTicketCount }
+  function updateUserTicketCount(number: number) {
+    userTicketCount.value = number
+  }
+
+  // Initialize user ticket count based on reservations
+  async function initializeUserTicketCount() {
+    await getList()
+    const userReservationsCount = reservations.value.filter((reservation: Reservation) => reservation.userId === currentUser.id).length
+    console.log('User Reservations Count:', userReservationsCount)
+    userTicketCount.value = userReservationsCount
+  }
+
+  return { user: currentUser, userTicketCount, updateUserTicketCount, initializeUserTicketCount }
 })
