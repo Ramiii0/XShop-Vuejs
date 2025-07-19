@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { APP_ROUTE_NAMES } from '@/constants/routeNames'
 import { useUserStore } from '@/stores/userStore'
@@ -10,6 +10,10 @@ const userStore = useUserStore()
 // Navigation
 const goToTickets = () => router.push(APP_ROUTE_NAMES.TICKETS)
 const goToReservations = () => router.push(APP_ROUTE_NAMES.RESERVATION)
+
+onMounted(() => {
+  userStore.initializeUserTicketCount()
+})
 </script>
 
 <template>
