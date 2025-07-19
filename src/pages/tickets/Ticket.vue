@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { useTickets } from '@/composables/useTicket'
 import type { Ticket } from '@/types/tickets/ticket'
+import type { TableColumn, TableAction } from '@/types/common/table'
 import { onMounted, ref } from 'vue'
 import CreateTicket from '@/components/tickets/CreateTicket.vue'
 import UpdateTicket from '@/components/tickets/UpdateTicket.vue'
+import DynamicTable from '@/components/dynamics/tables/DynamicTable.vue'
 
 const { tickets, loading, error, getList, remove } = useTickets()
 console.log('tickets', tickets)
@@ -18,9 +20,44 @@ const openUpdateDialog = (ticket: Ticket) => {
   updateDialog.value = true
 }
 
+// Search state
+const searchQuery = ref('')
+
 const onSearch = (searchValue: string) => {
-  getList(searchValue)
+  searchQuery.value = searchValue
+  // Note: We're now using client-side search instead of server-side
+  // If you want server-side search, you can still call getList(searchValue)
 }
+
+const handleTicketChange = async () => {
+  await getList()
+}
+
+const tableColumns: TableColumn[] = [
+  { key: 'id', label: 'Id', width: '80px', sortable: true },
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'time', label: 'Time', sortable: true },
+  { key: 'destination', label: 'Destination', sortable: true },
+  { key: 'description', label: 'Description', sortable: false }
+]
+
+// Define which fields to search in
+const searchFields = ['name', 'destination', 'description']
+
+const tableActions: TableAction[] = [
+  {
+    label: 'Edit',
+    color: 'primary',
+    variant: 'text',
+    action: (item: Ticket) => openUpdateDialog(item)
+  },
+  {
+    label: 'Delete',
+    color: 'error',
+    variant: 'text',
+    action: (item: Ticket) => remove(item.id)
+  }
+]
 
 loading.value = true
 
@@ -37,11 +74,12 @@ onMounted(() => {
         <CreateTicket
         v-if="createDialog"
          v-model:dialog="createDialog"
-         />
+         @ticket-created="handleTicketChange" />
         <UpdateTicket 
           v-if="updateDialog && selectedTicket"
           v-model:dialog="updateDialog"
           :ticketData="selectedTicket"
+          @ticket-updated="handleTicketChange"
         />
         </v-col>
            <v-spacer></v-spacer>
@@ -50,54 +88,20 @@ onMounted(() => {
            </v-col>
 
     </v-row>
-    <div v-if="loading">
-      <!-- TODO: select type skeleton loader -->
-                <v-skeleton-loader type="table"></v-skeleton-loader>
-    </div>
-    <div v-else>
-            <v-table hover>
-    <thead>
-      <tr>
-        <th class="text-left">
-          Id
-        </th>
-        <th class="text-left">
-          Name
-        </th>
-         <th class="text-left">
-          Time
-        </th>
-         <th class="text-left">
-          Destination
-        </th>
-        <th class="text-left">
-          Description
-        </th>
-        <th class="text-left">
-          Crud
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in tickets"
-        :key="item.name"
-      >
-       <td>{{ item.id }}</td>
-       <td>{{ item.name }}</td>
-        <td>{{ item.time }}</td>
-        <td>{{ item.description }}</td>
-        <td>{{ item.destination }}</td>
-
-        <td>
-          <v-btn color="primary" variant="text" @click="openUpdateDialog(item)">Edit</v-btn>
-          <v-btn color="error" variant="text" @click="remove(item.id)">Delete</v-btn>
-        </td>
-
-      </tr>
-    </tbody>
-  </v-table>
-    </div>
+    
+    <DynamicTable
+      :items="tickets"
+      :columns="tableColumns"
+      :actions="tableActions"
+      :loading="loading"
+      key-field="id"
+      hover
+      :items-per-page="10"
+      :multi-sort="false"
+      :must-sort="false"
+      :search="searchQuery"
+      :search-fields="searchFields"
+    />
 
 </v-container>
 </template>

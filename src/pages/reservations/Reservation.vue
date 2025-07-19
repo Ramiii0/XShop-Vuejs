@@ -2,8 +2,10 @@
 import { onMounted, reactive, ref } from 'vue'
 import CreateReservation from '@/components/reservations/CreateReservation.vue'
 import UpdateReservation from '@/components/reservations/UpdateReservation.vue'
+import DynamicTable from '@/components/dynamics/tables/DynamicTable.vue'
 import { useReservations } from '@/composables/useReservation'
 import type { Reservation } from '@/types/reservations/reservation'
+import type { TableColumn, TableAction } from '@/types/common/table'
 
 const { reservations, loading, error, getList, remove } = useReservations()
 const createDialog = ref(false)
@@ -17,6 +19,28 @@ const openUpdateDialog = (reservation: Reservation) => {
   updateDialog.value = true
 }
 
+// Define table columns for reservations
+const tableColumns: TableColumn[] = [
+  { key: 'id', label: 'Id', width: '80px', sortable: true },
+  { key: 'ticketId', label: 'Ticket ID', sortable: true },
+  { key: 'userId', label: 'User ID', sortable: true }
+]
+
+// Define table actions for reservations
+const tableActions: TableAction[] = [
+  {
+    label: 'Edit',
+    color: 'primary',
+    variant: 'text',
+    action: (item: Reservation) => openUpdateDialog(item)
+  },
+  {
+    label: 'Delete',
+    color: 'error',
+    variant: 'text',
+    action: (item: Reservation) => remove(item.id)
+  }
+]
 
 loading.value = true
 
@@ -46,46 +70,18 @@ onMounted(() => {
            </v-col>
 
     </v-row>
-    <div v-if="loading">
-      <!-- TODO: select type skeleton loader -->
-                <v-skeleton-loader type="table"></v-skeleton-loader>
-    </div>
-    <div v-else>
-            <v-table hover>
-    <thead>
-      <tr>
-        <th class="text-left">
-          Id
-        </th>
-        <th class="text-left">
-          TicketId
-        </th>
-         <th class="text-left">
-          UserId
-        </th>
-        <th class="text-left">
-          Crud
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in reservations"
-        :key="item.id"
-      >
-       <td>{{ item.id }}</td>
-       <td>{{ item.ticketId }}</td>
-       <td>{{ item.userId }}</td>
-
-        <td>
-          <v-btn color="primary" variant="text" @click="openUpdateDialog(item)">Edit</v-btn>
-          <v-btn color="error" variant="text" @click="remove(item.id)">Delete</v-btn>
-        </td>
-
-      </tr>
-    </tbody>
-  </v-table>
-    </div>
+    
+    <DynamicTable
+      :items="reservations"
+      :columns="tableColumns"
+      :actions="tableActions"
+      :loading="loading"
+      key-field="id"
+      hover
+      :items-per-page="10"
+      :multi-sort="false"
+      :must-sort="false"
+    />
 
 </v-container>
 </template>

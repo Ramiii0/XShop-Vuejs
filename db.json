@@ -2,7 +2,7 @@
   "tickets": [
     {
       "name": "rami",
-      "description": "sssssssssssssssssdad",
+      "description": "sa",
       "destination": "asf",
       "time": "2025-07-16T00:00:00.000Z",
       "id": "dca1"
@@ -13,28 +13,284 @@
       "description": "d",
       "destination": "d",
       "time": "2025-07-09T00:00:00.000Z"
+    },
+    {
+      "id": "f4d5",
+      "name": "ds",
+      "description": "ds",
+      "destination": "d",
+      "time": "2025-07-26T00:00:00.000Z"
+    },
+    {
+      "id": "2085",
+      "name": "test",
+      "description": "test",
+      "destination": "test",
+      "time": "2025-07-02T00:00:00.000Z"
+    },
+    {
+      "id": "ef06",
+      "name": "test from dynamic",
+      "description": "test from dynamic",
+      "destination": "test from dynamic",
+      "time": "2025-07-25T00:00:00.000Z"
+    },
+    {
+      "id": "t001",
+      "name": "Morning Express",
+      "description": "Fast morning commute train",
+      "destination": "New York City",
+      "time": "2025-07-20T06:30:00.000Z"
+    },
+    {
+      "id": "t002",
+      "name": "Business Class Flight",
+      "description": "Premium business class service",
+      "destination": "Los Angeles",
+      "time": "2025-07-21T14:45:00.000Z"
+    },
+    {
+      "id": "t003",
+      "name": "City Bus Route 42",
+      "description": "Downtown to airport shuttle",
+      "destination": "Chicago Airport",
+      "time": "2025-07-22T08:15:00.000Z"
+    },
+    {
+      "id": "t004",
+      "name": "High Speed Rail",
+      "description": "Bullet train service",
+      "destination": "San Francisco",
+      "time": "2025-07-23T11:20:00.000Z"
+    },
+    {
+      "id": "t005",
+      "name": "Ocean Cruise",
+      "description": "7-day Mediterranean cruise",
+      "destination": "Barcelona",
+      "time": "2025-07-24T18:00:00.000Z"
+    },
+    {
+      "id": "t006",
+      "name": "Metro Line 5",
+      "description": "Underground metro service",
+      "destination": "Boston Downtown",
+      "time": "2025-07-25T07:45:00.000Z"
+    },
+    {
+      "id": "t007",
+      "name": "Night Flight",
+      "description": "Red-eye flight to save money",
+      "destination": "Miami",
+      "time": "2025-07-26T23:30:00.000Z"
+    },
+    {
+      "id": "t008",
+      "name": "Tourist Bus",
+      "description": "City sightseeing tour",
+      "destination": "Washington DC",
+      "time": "2025-07-27T10:00:00.000Z"
+    },
+    {
+      "id": "t009",
+      "name": "Ferry Service",
+      "description": "Island hopping ferry",
+      "destination": "Martha's Vineyard",
+      "time": "2025-07-28T12:30:00.000Z"
+    },
+    {
+      "id": "t010",
+      "name": "Express Coach",
+      "description": "Long distance coach service",
+      "destination": "Philadelphia",
+      "time": "2025-07-29T16:15:00.000Z"
+    },
+    {
+      "id": "t011",
+      "name": "Airport Shuttle",
+      "description": "Hotel to airport transfer",
+      "destination": "Denver Airport",
+      "time": "2025-07-30T05:45:00.000Z"
+    },
+    {
+      "id": "t012",
+      "name": "Mountain Train",
+      "description": "Scenic mountain railway",
+      "destination": "Aspen",
+      "time": "2025-07-31T09:30:00.000Z"
+    },
+    {
+      "id": "t013",
+      "name": "Luxury Liner",
+      "description": "First class ocean liner",
+      "destination": "London",
+      "time": "2025-08-01T20:00:00.000Z"
+    },
+    {
+      "id": "t014",
+      "name": "Regional Train",
+      "description": "Regional railway connection",
+      "destination": "Portland",
+      "time": "2025-08-02T13:45:00.000Z"
+    },
+    {
+      "id": "t015",
+      "name": "Charter Flight",
+      "description": "Private charter service",
+      "destination": "Las Vegas",
+      "time": "2025-08-03T15:20:00.000Z"
+    },
+    {
+      "id": "t016",
+      "name": "City Tram",
+      "description": "Historic city tram tour",
+      "destination": "San Diego",
+      "time": "2025-08-04T11:10:00.000Z"
+    },
+    {
+      "id": "t017",
+      "name": "Cargo Ship",
+      "description": "Freight and passenger service",
+      "destination": "Seattle",
+      "time": "2025-08-05T22:15:00.000Z"
+    },
+    {
+      "id": "t018",
+      "name": "Helicopter Tour",
+      "description": "Aerial city tour",
+      "destination": "Grand Canyon",
+      "time": "2025-08-06T14:30:00.000Z"
+    },
+    {
+      "id": "t019",
+      "name": "Subway Express",
+      "description": "Fast underground service",
+      "destination": "Atlanta",
+      "time": "2025-08-07T08:00:00.000Z"
+    },
+    {
+      "id": "t020",
+      "name": "Weekend Special",
+      "description": "Weekend getaway package",
+      "destination": "Nashville",
+      "time": "2025-08-08T17:45:00.000Z"
     }
   ],
   "reservations": [
     {
-      "ticketId": null,
-      "userId": "1",
-      "id": "3699"
-    },
-    {
-      "id": "5468",
-      "ticketId": "dca1",
+      "id": "8c87",
+      "ticketId": "ac74",
       "userId": "3"
     },
     {
-      "id": "1e79",
-      "ticketId": "dca1",
+      "id": "0bb9",
+      "ticketId": "ac74",
+      "userId": "2"
+    },
+    {
+      "id": "9364",
+      "ticketId": "ef06",
       "userId": "1"
     },
     {
-      "id": "7889",
-      "ticketId": "dca1",
-      "userId": "2"
+      "id": "r001",
+      "ticketId": "t001",
+      "userId": "101"
+    },
+    {
+      "ticketId": "t002",
+      "userId": "1",
+      "id": "r002"
+    },
+    {
+      "ticketId": "t003",
+      "userId": "1",
+      "id": "r003"
+    },
+    {
+      "id": "r004",
+      "ticketId": "t004",
+      "userId": "104"
+    },
+    {
+      "ticketId": "t005",
+      "userId": "1",
+      "id": "r005"
+    },
+    {
+      "id": "r006",
+      "ticketId": "t006",
+      "userId": "106"
+    },
+    {
+      "ticketId": "t007",
+      "userId": "1",
+      "id": "r007"
+    },
+    {
+      "id": "r008",
+      "ticketId": "t008",
+      "userId": "108"
+    },
+    {
+      "id": "r009",
+      "ticketId": "t009",
+      "userId": "109"
+    },
+    {
+      "id": "r010",
+      "ticketId": "t010",
+      "userId": "110"
+    },
+    {
+      "id": "r011",
+      "ticketId": "t011",
+      "userId": "111"
+    },
+    {
+      "id": "r012",
+      "ticketId": "t012",
+      "userId": "112"
+    },
+    {
+      "id": "r013",
+      "ticketId": "t013",
+      "userId": "113"
+    },
+    {
+      "id": "r014",
+      "ticketId": "t014",
+      "userId": "114"
+    },
+    {
+      "id": "r015",
+      "ticketId": "t015",
+      "userId": "115"
+    },
+    {
+      "id": "r016",
+      "ticketId": "t016",
+      "userId": "116"
+    },
+    {
+      "id": "r017",
+      "ticketId": "t017",
+      "userId": "117"
+    },
+    {
+      "id": "r018",
+      "ticketId": "t018",
+      "userId": "118"
+    },
+    {
+      "id": "r019",
+      "ticketId": "t019",
+      "userId": "119"
+    },
+    {
+      "id": "r020",
+      "ticketId": "t020",
+      "userId": "120"
     }
   ]
 }

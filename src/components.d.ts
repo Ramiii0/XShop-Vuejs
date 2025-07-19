@@ -12,6 +12,7 @@ declare module 'vue' {
     CreateReservation: typeof import('./components/reservations/CreateReservation.vue')['default']
     CreateTicket: typeof import('./components/tickets/CreateTicket.vue')['default']
     DynamicForm: typeof import('./components/dynamics/forms/DynamicForm.vue')['default']
+    DynamicTable: typeof import('./components/dynamics/tables/DynamicTable.vue')['default']
     DynamicTicketForm: typeof import('./components/tickets/DynamicTicketForm.vue')['default']
     Footer: typeof import('./components/layouts/Footer.vue')['default']
     Header: typeof import('./components/layouts/Header.vue')['default']
