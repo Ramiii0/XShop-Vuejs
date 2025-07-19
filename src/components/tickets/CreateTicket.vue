@@ -10,7 +10,6 @@ interface Props {
 
 interface Emits {
   (e: 'update:dialog', value: boolean): void
-  (e: 'ticket-created'): void
 }
 
 const props = defineProps<Props>()
@@ -89,7 +88,6 @@ const getTicketPayload = (): CreateTicket => {
 const saveTicket = async (): Promise<void> => {
   await create(getTicketPayload())
   console.log('Ticket saved:', getTicketPayload())
-  emit('ticket-created')
   closeDialog()
 }
 </script>

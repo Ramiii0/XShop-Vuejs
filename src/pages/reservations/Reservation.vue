@@ -6,7 +6,6 @@ import { useReservations } from '@/composables/useReservation'
 import type { Reservation } from '@/types/reservations/reservation'
 
 const { reservations, loading, error, getList, remove } = useReservations()
-console.log('reservations', reservations)
 const createDialog = ref(false)
 
 const openCreateDialog = () => { createDialog.value = true }
@@ -18,9 +17,6 @@ const openUpdateDialog = (reservation: Reservation) => {
   updateDialog.value = true
 }
 
-const handleReservationChange = async () => {
-  await getList()
-}
 
 loading.value = true
 
@@ -37,12 +33,11 @@ onMounted(() => {
         <CreateReservation
         v-if="createDialog"
          v-model:dialog="createDialog"
-         @reservation-created="handleReservationChange" />
+         />
         <UpdateReservation 
           v-if="updateDialog && selectedReservation"
           v-model:dialog="updateDialog"
           :reservationData="selectedReservation"
-          @reservation-updated="handleReservationChange"
         />
         </v-col>
            <v-spacer></v-spacer>

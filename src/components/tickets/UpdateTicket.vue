@@ -12,7 +12,6 @@ interface Props {
 
 interface Emits {
   (e: 'update:dialog', value: boolean): void
-  (e: 'ticket-updated'): void
 }
 
 const props = defineProps<Props>()
@@ -92,7 +91,6 @@ const getUpdatePayload = (): UpdateTicket => {
 const updateTicket = async (): Promise<void> => {
   await update(ticketId, getUpdatePayload())
   console.log('Ticket updated:', getUpdatePayload())
-  emit('ticket-updated')
   closeDialog()
 }
 </script>

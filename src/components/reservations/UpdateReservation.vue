@@ -14,7 +14,6 @@ interface Props {
 
 interface Emits {
   (e: 'update:dialog', value: boolean): void
-  (e: 'reservation-updated'): void
 }
 
 const props = defineProps<Props>()
@@ -85,7 +84,6 @@ const getUpdatePayload = (): UpdateReservation => {
 const updateReservation = async (): Promise<void> => {
   await update(reservationId, getUpdatePayload())
   console.log('Reservation updated:', getUpdatePayload())
-  emit('reservation-updated')
   closeDialog()
 }
 

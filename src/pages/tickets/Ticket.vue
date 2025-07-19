@@ -22,10 +22,6 @@ const onSearch = (searchValue: string) => {
   getList(searchValue)
 }
 
-const handleTicketChange = async () => {
-  await getList()
-}
-
 loading.value = true
 
 onMounted(() => {
@@ -41,12 +37,11 @@ onMounted(() => {
         <CreateTicket
         v-if="createDialog"
          v-model:dialog="createDialog"
-         @ticket-created="handleTicketChange" />
+         />
         <UpdateTicket 
           v-if="updateDialog && selectedTicket"
           v-model:dialog="updateDialog"
           :ticketData="selectedTicket"
-          @ticket-updated="handleTicketChange"
         />
         </v-col>
            <v-spacer></v-spacer>
