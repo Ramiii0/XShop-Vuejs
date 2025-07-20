@@ -7,7 +7,7 @@ import { useReservations } from '@/composables/useReservation'
 import type { Reservation } from '@/types/reservations/reservation'
 import type { TableColumn, TableAction } from '@/types/common/table'
 
-const { reservations, loading, error, getList, remove } = useReservations()
+const { response, loading, error, getList, remove } = useReservations()
 const createDialog = ref(false)
 
 const openCreateDialog = () => { createDialog.value = true }
@@ -18,6 +18,9 @@ const openUpdateDialog = (reservation: Reservation) => {
   selectedReservation.value = reservation
   updateDialog.value = true
 }
+
+const pageSize = 10
+const totalPages = ref(1)
 
 // Define table columns for reservations
 const tableColumns: TableColumn[] = [
@@ -42,10 +45,21 @@ const tableActions: TableAction[] = [
   }
 ]
 
+const onSearch = (searchValue: string) => {  
+  getList({
+    search: searchValue
+  })
+}
+
+async function fetchReservations(page: number = 1)  {
+ await getList({ _page: page, _per_page: pageSize })
+}
+
 loading.value = true
 
-onMounted(() => {
-  getList()
+onMounted(async () => {
+  await getList()
+  totalPages.value = response.value?.pages ?? 1;
 })
 </script>
 
@@ -66,21 +80,23 @@ onMounted(() => {
         </v-col>
            <v-spacer></v-spacer>
            <v-col>
-            <SearchInputField></SearchInputField>
+            <SearchInputField @search="onSearch"/>
            </v-col>
 
     </v-row>
     
     <DynamicTable
-      :items="reservations"
+      :items="response?.data || []"
       :columns="tableColumns"
       :actions="tableActions"
       :loading="loading"
       key-field="id"
       hover
-      :items-per-page="10"
-      :multi-sort="false"
-      :must-sort="false"
+    />
+    <Pagination
+      :length="totalPages"
+       :total-visible="10"
+       @page-change="fetchReservations"
     />
 
 </v-container>

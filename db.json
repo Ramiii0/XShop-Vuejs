@@ -174,6 +174,83 @@
       "description": "Weekend getaway package",
       "destination": "Nashville",
       "time": "2025-08-08T17:45:00.000Z"
+    },
+    {
+      "id": "bcf6",
+      "name": "testtttttttttttttttttttttttt",
+      "description": "testtttttttttttttttttttttttt",
+      "destination": "testtttttttttttttttttttttttt",
+      "time": "2025-07-09T00:00:00.000Z"
+    },
+    {
+      "id": "t021",
+      "name": "Golden Gate Express",
+      "description": "Scenic route across the Golden Gate Bridge",
+      "destination": "Sausalito",
+      "time": "2025-08-09T10:15:00.000Z"
+    },
+    {
+      "id": "t022",
+      "name": "Desert Wind",
+      "description": "Cross-country bus through the desert",
+      "destination": "Phoenix",
+      "time": "2025-08-10T06:45:00.000Z"
+    },
+    {
+      "id": "t023",
+      "name": "Coastal Cruiser",
+      "description": "Luxury yacht along the coast",
+      "destination": "Monterey Bay",
+      "time": "2025-08-11T14:20:00.000Z"
+    },
+    {
+      "id": "t024",
+      "name": "Mountain Cable Car",
+      "description": "Historic cable car to mountain peak",
+      "destination": "Pike's Peak",
+      "time": "2025-08-12T09:30:00.000Z"
+    },
+    {
+      "id": "t025",
+      "name": "River Rapids",
+      "description": "White water rafting adventure",
+      "destination": "Colorado River",
+      "time": "2025-08-13T12:00:00.000Z"
+    },
+    {
+      "id": "t026",
+      "name": "Midnight Express",
+      "description": "Late night train service",
+      "destination": "New Orleans",
+      "time": "2025-08-14T23:45:00.000Z"
+    },
+    {
+      "id": "t027",
+      "name": "Safari Bus",
+      "description": "Wildlife safari tour bus",
+      "destination": "Yellowstone",
+      "time": "2025-08-15T07:00:00.000Z"
+    },
+    {
+      "id": "t028",
+      "name": "Island Hopper",
+      "description": "Multi-island flight service",
+      "destination": "Hawaiian Islands",
+      "time": "2025-08-16T16:30:00.000Z"
+    },
+    {
+      "id": "t029",
+      "name": "Thunder Road",
+      "description": "High-speed motorcycle tour",
+      "destination": "Sturgis",
+      "time": "2025-08-17T11:45:00.000Z"
+    },
+    {
+      "id": "t030",
+      "name": "Space Shuttle",
+      "description": "Simulated space travel experience",
+      "destination": "Kennedy Space Center",
+      "time": "2025-08-18T13:15:00.000Z"
     }
   ],
   "reservations": [
@@ -223,19 +300,9 @@
       "userId": "106"
     },
     {
-      "ticketId": "t007",
-      "userId": "1",
-      "id": "r007"
-    },
-    {
       "id": "r008",
       "ticketId": "t008",
       "userId": "108"
-    },
-    {
-      "id": "r009",
-      "ticketId": "t009",
-      "userId": "109"
     },
     {
       "id": "r010",

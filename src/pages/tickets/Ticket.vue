@@ -7,10 +7,12 @@ import CreateTicket from '@/components/tickets/CreateTicket.vue'
 import UpdateTicket from '@/components/tickets/UpdateTicket.vue'
 import DynamicTable from '@/components/dynamics/tables/DynamicTable.vue'
 
-const { tickets, loading, error, getList, remove } = useTickets()
-console.log('tickets', tickets)
+const { response, loading, error, getList, remove } = useTickets()
+console.log('tickets', response)
 
 const createDialog = ref(false)
+const pageSize = 10
+const totalPages = ref(1)
 const openCreateDialog = () => { createDialog.value = true }
 
 const updateDialog = ref(false)
@@ -20,17 +22,10 @@ const openUpdateDialog = (ticket: Ticket) => {
   updateDialog.value = true
 }
 
-// Search state
-const searchQuery = ref('')
-
 const onSearch = (searchValue: string) => {
-  searchQuery.value = searchValue
-  // Note: We're now using client-side search instead of server-side
-  // If you want server-side search, you can still call getList(searchValue)
-}
-
-const handleTicketChange = async () => {
-  await getList()
+  getList({
+    search: searchValue
+  })
 }
 
 const tableColumns: TableColumn[] = [
@@ -41,8 +36,6 @@ const tableColumns: TableColumn[] = [
   { key: 'description', label: 'Description', sortable: false }
 ]
 
-// Define which fields to search in
-const searchFields = ['name', 'destination', 'description']
 
 const tableActions: TableAction[] = [
   {
@@ -58,11 +51,16 @@ const tableActions: TableAction[] = [
     action: (item: Ticket) => remove(item.id)
   }
 ]
+async function fetchTickets(page: number = 1)  {
+ await getList({ _page: page, _per_page: pageSize })
+}
 
-loading.value = true
+onMounted(async () => {
+  loading.value = true
+  await getList()
+  console.log('Tickets fetched:', response.value);
 
-onMounted(() => {
-  getList()
+  totalPages.value = response.value?.pages ?? 1;
 })
 </script>
 
@@ -74,33 +72,34 @@ onMounted(() => {
         <CreateTicket
         v-if="createDialog"
          v-model:dialog="createDialog"
-         @ticket-created="handleTicketChange" />
+
+          />
         <UpdateTicket 
           v-if="updateDialog && selectedTicket"
           v-model:dialog="updateDialog"
           :ticketData="selectedTicket"
-          @ticket-updated="handleTicketChange"
+  
         />
         </v-col>
            <v-spacer></v-spacer>
            <v-col>
-            <SearchInputField @search="onSearch"></SearchInputField>
+            <SearchInputField @search="onSearch"/>
            </v-col>
 
     </v-row>
     
     <DynamicTable
-      :items="tickets"
+      :items="response?.data || []"
       :columns="tableColumns"
       :actions="tableActions"
       :loading="loading"
       key-field="id"
       hover
-      :items-per-page="10"
-      :multi-sort="false"
-      :must-sort="false"
-      :search="searchQuery"
-      :search-fields="searchFields"
+    />
+    <Pagination
+      :length="totalPages"
+       :total-visible="10"
+       @page-change="fetchTickets"
     />
 
 </v-container>

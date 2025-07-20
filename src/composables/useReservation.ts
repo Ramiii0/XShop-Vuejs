@@ -4,15 +4,17 @@ import * as reservationApi from '@/apiServices/reservation'
 import type { Reservation } from '@/types/reservations/reservation'
 import type { CreateReservation } from '@/types/reservations/createReservation'
 import type { UpdateReservation } from '@/types/reservations/updateReservation'
+import type { ReservationQueryParam } from '@/types/reservations/reservationQueryParams'
+import type { PaginatedResponse } from '@/types/common/paginatedResponse'
 import { useUserStore } from '@/stores/userStore'
 
 // Global state - shared across all components
-const reservations = ref<Reservation[]>([])
+const response = ref<PaginatedResponse<Reservation>>()
 const loading = ref(false)
 const error = ref<Error | null>(null)
 
 function getReservationsCount() {
-  return computed(() => reservations.value.filter(reservation => reservation.userId === useUserStore().user.id).length)
+  return computed(() => response.value?.data.filter((reservation: Reservation) => reservation.userId === useUserStore().user.id).length || 0)
 }
 
 // Composable for listing, creating, and deleting reservations
@@ -20,12 +22,12 @@ export function useReservations() {
   const userStore = useUserStore()
 
   // Load the full list of reservations
-  async function getList() {
+  async function getList(queryParam : ReservationQueryParam | null = null) {
     loading.value = true;
     error.value = null;
     try {
-      const { data } = await reservationApi.fetchReservations();
-      reservations.value = data;
+      const res = await reservationApi.fetchReservations(queryParam);
+      response.value = res;
       
     } catch (err: unknown) {
       error.value = err as Error;
@@ -39,7 +41,7 @@ export function useReservations() {
     error.value   = null;
     try {
       const { data } = await reservationApi.fetchReservation(id);
-      reservations.value.push(data);
+      // Handle single reservation fetch if needed
     } catch (err) {
       error.value = err as Error;
     } finally {
@@ -97,7 +99,7 @@ export function useReservations() {
 
 
   return {
-    reservations,
+    response,
     loading,
     error,
     getList,

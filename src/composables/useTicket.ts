@@ -4,23 +4,26 @@ import * as ticketApi from '@/apiServices/ticket'
 import type { Ticket } from '@/types/tickets/ticket'
 import type { CreateTicket } from '@/types/tickets/createTicket'
 import type { UpdateTicket } from '@/types/tickets/updateTicket'
+import type { TicketQueryParam } from '@/types/tickets/ticketQueryParams'
+import type { PaginatedResponse } from '@/types/common/paginatedResponse'
 
 // Global state - shared across all components
-const tickets = ref<Ticket[]>([])
+const response = ref<PaginatedResponse<Ticket>>()
 const loading = ref(false)
 const error = ref<Error | null>(null)
+const ticket = ref<Ticket | null>(null)
+
 
 // Composable for listing, creating, and deleting tickets
 export function useTickets() {
-
+  
   // Load the full list of tickets
-  async function getList(name : string | null = null) {
+  async function getList(queryParam : TicketQueryParam | null = null) {
     loading.value = true;
     error.value = null;
     try {
-      const { data } = await ticketApi.fetchTickets(name);
-      tickets.value = data;
-      
+      const res = await ticketApi.fetchTickets(queryParam);
+      response.value = res;
     } catch (err: unknown) {
       error.value = err as Error;
     } finally {
@@ -32,8 +35,8 @@ export function useTickets() {
     loading.value = true;
     error.value   = null;
     try {
-      const { data } = await ticketApi.fetchTicket(id);
-      tickets.value.push(data);
+      const data = await ticketApi.fetchTicket(id);
+      ticket.value = data;
     } catch (err) {
       error.value = err as Error;
     } finally {
@@ -88,7 +91,7 @@ export function useTickets() {
 
 
   return {
-    tickets,
+    response,
     loading,
     error,
     getList,
