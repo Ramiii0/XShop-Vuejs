@@ -1,32 +1,11 @@
 {
   "tickets": [
     {
-      "name": "rami",
+      "name": "ramiiiiiiiii",
       "description": "sa",
       "destination": "asf",
       "time": "2025-07-16T00:00:00.000Z",
       "id": "dca1"
-    },
-    {
-      "id": "ac74",
-      "name": "ds",
-      "description": "d",
-      "destination": "d",
-      "time": "2025-07-09T00:00:00.000Z"
-    },
-    {
-      "id": "f4d5",
-      "name": "ds",
-      "description": "ds",
-      "destination": "d",
-      "time": "2025-07-26T00:00:00.000Z"
-    },
-    {
-      "id": "2085",
-      "name": "test",
-      "description": "test",
-      "destination": "test",
-      "time": "2025-07-02T00:00:00.000Z"
     },
     {
       "id": "ef06",
@@ -251,94 +230,16 @@
       "description": "Simulated space travel experience",
       "destination": "Kennedy Space Center",
       "time": "2025-08-18T13:15:00.000Z"
+    },
+    {
+      "id": "4ee5",
+      "name": "Man",
+      "description": "Man",
+      "destination": "231",
+      "time": "2025-07-17T00:00:00.000Z"
     }
   ],
   "reservations": [
-    {
-      "id": "8c87",
-      "ticketId": "ac74",
-      "userId": "3"
-    },
-    {
-      "id": "0bb9",
-      "ticketId": "ac74",
-      "userId": "2"
-    },
-    {
-      "id": "9364",
-      "ticketId": "ef06",
-      "userId": "1"
-    },
-    {
-      "id": "r001",
-      "ticketId": "t001",
-      "userId": "101"
-    },
-    {
-      "ticketId": "t002",
-      "userId": "1",
-      "id": "r002"
-    },
-    {
-      "ticketId": "t003",
-      "userId": "1",
-      "id": "r003"
-    },
-    {
-      "id": "r004",
-      "ticketId": "t004",
-      "userId": "104"
-    },
-    {
-      "ticketId": "t005",
-      "userId": "1",
-      "id": "r005"
-    },
-    {
-      "id": "r006",
-      "ticketId": "t006",
-      "userId": "106"
-    },
-    {
-      "id": "r008",
-      "ticketId": "t008",
-      "userId": "108"
-    },
-    {
-      "id": "r010",
-      "ticketId": "t010",
-      "userId": "110"
-    },
-    {
-      "id": "r011",
-      "ticketId": "t011",
-      "userId": "111"
-    },
-    {
-      "id": "r012",
-      "ticketId": "t012",
-      "userId": "112"
-    },
-    {
-      "id": "r013",
-      "ticketId": "t013",
-      "userId": "113"
-    },
-    {
-      "id": "r014",
-      "ticketId": "t014",
-      "userId": "114"
-    },
-    {
-      "id": "r015",
-      "ticketId": "t015",
-      "userId": "115"
-    },
-    {
-      "id": "r016",
-      "ticketId": "t016",
-      "userId": "116"
-    },
     {
       "id": "r017",
       "ticketId": "t017",
@@ -355,9 +256,49 @@
       "userId": "119"
     },
     {
-      "id": "r020",
-      "ticketId": "t020",
-      "userId": "120"
+      "id": "21de",
+      "ticketId": "ef06",
+      "userId": "2"
+    },
+    {
+      "id": "b479",
+      "ticketId": "ef06",
+      "userId": "2"
+    },
+    {
+      "id": "4f58",
+      "ticketId": "ef06",
+      "userId": "2"
+    },
+    {
+      "id": "41cd",
+      "ticketId": "t004",
+      "userId": "3"
+    },
+    {
+      "id": "368e",
+      "ticketId": "dca1",
+      "userId": "2"
+    },
+    {
+      "id": "d056",
+      "ticketId": "dca1",
+      "userId": "1"
+    },
+    {
+      "id": "84a9",
+      "ticketId": "dca1",
+      "userId": "1"
+    },
+    {
+      "id": "4192",
+      "ticketId": "t001",
+      "userId": "1"
+    },
+    {
+      "id": "95c5",
+      "ticketId": "t001",
+      "userId": "1"
     }
   ]
 }

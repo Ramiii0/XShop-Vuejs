@@ -12,7 +12,6 @@ export async function fetchTickets(queryParam : TicketQueryParam | null = null) 
       _per_page: queryParam?._per_page || 10
     }
   });
-  console.log('Fetched Tickets:', response.data);
   
   return response.data;
 }

@@ -17,15 +17,12 @@ interface Emits {
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
-// Create a local ref that syncs with the prop
 const localDialog = ref(props.dialog)
 
-// Watch for prop changes
 watch(() => props.dialog, (newVal) => {
   localDialog.value = newVal
 })
 
-// Watch for local changes and emit to parent
 watch(localDialog, (newVal) => {
   emit('update:dialog', newVal)
 })
@@ -38,7 +35,6 @@ const { update } = useTickets()
 
 const ticketId = props.ticketData.id
 
-// Build the schema matching UpdateTicket
 const ticketSchema: Field[] = [
   { 
     label: 'Name', 
@@ -90,7 +86,6 @@ const getUpdatePayload = (): UpdateTicket => {
 
 const updateTicket = async (): Promise<void> => {
   await update(ticketId, getUpdatePayload())
-  console.log('Ticket updated:', getUpdatePayload())
   closeDialog()
 }
 </script>

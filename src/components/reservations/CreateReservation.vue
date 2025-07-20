@@ -18,19 +18,15 @@ interface Emits {
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
-const { tickets, getList: getTicketsList } = useTickets()
+const { response, getList: getTicketsList } = useTickets()
 const userStore = useUserStore()
 
-
-// Create a local ref that syncs with the prop
 const localDialog = ref(props.dialog)
 
-// Watch for prop changes
 watch(() => props.dialog, (newVal) => {
   localDialog.value = newVal
 })
 
-// Watch for local changes and emit to parent
 watch(localDialog, (newVal) => {
   emit('update:dialog', newVal)
 })
@@ -41,19 +37,17 @@ const closeDialog = (): void => {
 
 const { create } = useReservations()
 
-// Load tickets when component mounts
 onMounted(() => {
   getTicketsList()
 })
 
-// Build the schema matching CreateReservation
 const reservationSchema = computed((): Field[] => [
   {
     label: 'Ticket ID',
     key: 'ticketId',
     type: 'select',
     placeholder: 'Select a ticket',
-    options: tickets.value.map(ticket => ({
+    options: response.value?.data.map(ticket => ({
       label: ticket.name,
       value: ticket.id
     }))

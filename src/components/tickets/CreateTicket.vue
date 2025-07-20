@@ -15,15 +15,12 @@ interface Emits {
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
-// Create a local ref that syncs with the prop
 const localDialog = ref(props.dialog)
 
-// Watch for prop changes
 watch(() => props.dialog, (newVal) => {
   localDialog.value = newVal
 })
 
-// Watch for local changes and emit to parent
 watch(localDialog, (newVal) => {
   emit('update:dialog', newVal)
 })
@@ -34,8 +31,6 @@ const closeDialog = (): void => {
 
 const { create } = useTickets()
 
-
-// Build the schema matching CreateTicket
 const ticketSchema: Field[] = [
   { 
     label: 'Name', 
@@ -87,7 +82,6 @@ const getTicketPayload = (): CreateTicket => {
 
 const saveTicket = async (): Promise<void> => {
   await create(getTicketPayload())
-  console.log('Ticket saved:', getTicketPayload())
   closeDialog()
 }
 </script>

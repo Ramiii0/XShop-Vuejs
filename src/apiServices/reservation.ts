@@ -1,4 +1,3 @@
-// src/api/reservation.js
 import api from './axios';
 import type { Reservation } from '@/types/reservations/reservation';
 import type { CreateReservation } from '@/types/reservations/createReservation';
@@ -9,8 +8,8 @@ export async function fetchReservations(queryParam : ReservationQueryParam | nul
   const response = await api.get('/reservations', {
     params: {
       userId: queryParam?.search || null,
-      _page: queryParam?._page || 1,
-      _per_page: queryParam?._per_page || 10,
+      _page: queryParam?._page || null,
+      _per_page: queryParam?._per_page || null,
     }
   });
   
@@ -19,6 +18,10 @@ export async function fetchReservations(queryParam : ReservationQueryParam | nul
 
 export function fetchReservation(id : string) : Promise<{ data: Reservation }> {
   return api.get(`/reservations/${id}`);
+}
+
+export function fetchAllReservation() : Promise<{ data: Reservation[] }> {
+  return api.get(`/reservations`);
 }
 
 export function createReservation(data: CreateReservation) : Promise<{ data: Reservation }> {

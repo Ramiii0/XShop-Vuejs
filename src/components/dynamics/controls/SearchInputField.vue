@@ -9,9 +9,8 @@
   function onClick () {
     emit('search', search.value)
     loading.value = true
-    console.log('Search value:', search.value)
-      loading.value = false
-      loaded.value = true
+    loading.value = false
+    loaded.value = true
   }
 </script>
 

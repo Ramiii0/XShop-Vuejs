@@ -22,14 +22,12 @@ const openUpdateDialog = (reservation: Reservation) => {
 const pageSize = 10
 const totalPages = ref(1)
 
-// Define table columns for reservations
 const tableColumns: TableColumn[] = [
   { key: 'id', label: 'Id', width: '80px', sortable: true },
   { key: 'ticketId', label: 'Ticket ID', sortable: true },
   { key: 'userId', label: 'User ID', sortable: true }
 ]
 
-// Define table actions for reservations
 const tableActions: TableAction[] = [
   {
     label: 'Edit',
@@ -58,7 +56,7 @@ async function fetchReservations(page: number = 1)  {
 loading.value = true
 
 onMounted(async () => {
-  await getList()
+  await getList({ _page: 1 , _per_page: pageSize });
   totalPages.value = response.value?.pages ?? 1;
 })
 </script>

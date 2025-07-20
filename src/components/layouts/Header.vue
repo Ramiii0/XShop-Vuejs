@@ -7,12 +7,11 @@ import { useUserStore } from '@/stores/userStore'
 const router = useRouter()
 const userStore = useUserStore()
 
-// Navigation
 const goToTickets = () => router.push(APP_ROUTE_NAMES.TICKETS)
 const goToReservations = () => router.push(APP_ROUTE_NAMES.RESERVATION)
 
-onMounted(() => {
-  userStore.initializeUserTicketCount()
+onMounted(async () => {
+  await userStore.updateUserTicketCount()
 })
 </script>
 

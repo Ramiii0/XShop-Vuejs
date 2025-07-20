@@ -8,7 +8,6 @@ import UpdateTicket from '@/components/tickets/UpdateTicket.vue'
 import DynamicTable from '@/components/dynamics/tables/DynamicTable.vue'
 
 const { response, loading, error, getList, remove } = useTickets()
-console.log('tickets', response)
 
 const createDialog = ref(false)
 const pageSize = 10
@@ -58,8 +57,6 @@ async function fetchTickets(page: number = 1)  {
 onMounted(async () => {
   loading.value = true
   await getList()
-  console.log('Tickets fetched:', response.value);
-
   totalPages.value = response.value?.pages ?? 1;
 })
 </script>

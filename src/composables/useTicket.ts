@@ -1,4 +1,3 @@
-// src/composables/useTickets.js
 import { ref } from 'vue'
 import * as ticketApi from '@/apiServices/ticket'
 import type { Ticket } from '@/types/tickets/ticket'
@@ -7,17 +6,13 @@ import type { UpdateTicket } from '@/types/tickets/updateTicket'
 import type { TicketQueryParam } from '@/types/tickets/ticketQueryParams'
 import type { PaginatedResponse } from '@/types/common/paginatedResponse'
 
-// Global state - shared across all components
 const response = ref<PaginatedResponse<Ticket>>()
 const loading = ref(false)
 const error = ref<Error | null>(null)
 const ticket = ref<Ticket | null>(null)
 
-
-// Composable for listing, creating, and deleting tickets
 export function useTickets() {
   
-  // Load the full list of tickets
   async function getList(queryParam : TicketQueryParam | null = null) {
     loading.value = true;
     error.value = null;
@@ -45,10 +40,7 @@ export function useTickets() {
   }
 
 
-  // Create a new ticket, then refresh list
   async function create(payload: CreateTicket) {
-    console.log('Creating Ticket:', payload);
-    
     loading.value = true;
     error.value = null;
     try {
@@ -61,7 +53,6 @@ export function useTickets() {
     }
   }
 
-  // Delete a ticket by ID, then refresh list
   async function remove(id: string) {
     loading.value = true;
     error.value = null;
