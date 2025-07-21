@@ -1,7 +1,7 @@
 interface CreateTicket {
-  name: string;
-  description: string;
-  destination: string;
-  time: Date;
+  name: string
+  description: string
+  destination: string
+  time: Date
 }
-export type { CreateTicket };
+export type { CreateTicket }

@@ -15,15 +15,15 @@
 </script>
 
 <template>
-      <v-text-field
-        v-model="search"
-        :loading="loading"
-        append-inner-icon="mdi-magnify"
-        density="compact"
-        label="Type a name"
-        variant="solo"
-        hide-details
-        single-line
-        @click:append-inner="onClick"
-      ></v-text-field>
+  <v-text-field
+    v-model="search"
+    append-inner-icon="mdi-magnify"
+    density="compact"
+    hide-details
+    label="Type a name"
+    :loading="loading"
+    single-line
+    variant="solo"
+    @click:append-inner="onClick"
+  />
 </template>

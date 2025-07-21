@@ -1,10 +1,10 @@
 interface BaseQueryParam {
-  _page?: number;
-  _per_page?: number;
-  search?: string;
+  _page?: number
+  _per_page?: number
+  search?: string
 }
 interface BaseQueryParamsWithSearch extends BaseQueryParam {
-  search?: string;
+  search?: string
 }
 
-export type { BaseQueryParam, BaseQueryParamsWithSearch };
+export type { BaseQueryParam, BaseQueryParamsWithSearch }

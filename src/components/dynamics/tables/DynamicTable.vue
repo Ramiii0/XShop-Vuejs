@@ -1,60 +1,60 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { TableColumn, TableAction } from '@/types/common/table'
+  import type { TableAction, TableColumn } from '@/types/common/table'
+  import { computed } from 'vue'
 
-const props = defineProps<{
-  items: any[]
-  columns: TableColumn[]
-  loading?: boolean
-  actions?: TableAction[]
-  keyField?: string
-  hover?: boolean
-  dense?: boolean
-}>()
+  const props = defineProps<{
+    items: any[]
+    columns: TableColumn[]
+    loading?: boolean
+    actions?: TableAction[]
+    keyField?: string
+    hover?: boolean
+    dense?: boolean
+  }>()
 
-const emit = defineEmits(['row-click', 'action'])
+  const emit = defineEmits(['row-click', 'action'])
 
-const keyField = computed(() => props.keyField || 'id')
+  const keyField = computed(() => props.keyField || 'id')
 
-const handleAction = (action: TableAction, item: any) => {
-  action.action(item)
-  emit('action', { action: action.label, item })
-}
+  const handleAction = (action: TableAction, item: any) => {
+    action.action(item)
+    emit('action', { action: action.label, item })
+  }
 
-const handleRowClick = (item: any) => {
-  emit('row-click', item)
-}
+  const handleRowClick = (item: any) => {
+    emit('row-click', item)
+  }
 
-const isActionVisible = (action: TableAction, item: any) => {
-  return action.visible ? action.visible(item) : true
-}
+  const isActionVisible = (action: TableAction, item: any) => {
+    return action.visible ? action.visible(item) : true
+  }
 
-const isActionDisabled = (action: TableAction, item: any) => {
-  return action.disabled ? action.disabled(item) : false
-}
+  const isActionDisabled = (action: TableAction, item: any) => {
+    return action.disabled ? action.disabled(item) : false
+  }
 </script>
 
 <template>
   <div class="dynamic-table-container">
     <!-- Loading State -->
     <div v-if="loading" class="loading-container">
-      <v-skeleton-loader 
-        type="table" 
+      <v-skeleton-loader
         class="rounded-lg elevation-1"
-      ></v-skeleton-loader>
+        type="table"
+      />
     </div>
-    
+
     <!-- Main Table -->
     <v-card v-else class="table-card rounded-lg elevation-2" variant="flat">
-      <v-table 
-        :hover="hover !== false" 
-        :density="dense ? 'compact' : 'default'"
+      <v-table
         class="modern-table"
+        :density="dense ? 'compact' : 'default'"
+        :hover="hover !== false"
       >
         <thead>
           <tr class="table-header">
-            <th 
-              v-for="column in columns" 
+            <th
+              v-for="column in columns"
               :key="column.key"
               class="header-cell"
               :class="[
@@ -65,10 +65,10 @@ const isActionDisabled = (action: TableAction, item: any) => {
             >
               <div class="header-content">
                 <span class="header-text">{{ column.label }}</span>
-                <v-icon 
-                  v-if="column.sortable" 
-                  size="small" 
+                <v-icon
+                  v-if="column.sortable"
                   class="sort-icon ml-1"
+                  size="small"
                 >
                   mdi-sort
                 </v-icon>
@@ -87,16 +87,16 @@ const isActionDisabled = (action: TableAction, item: any) => {
             :class="{ 'even-row': index % 2 === 1 }"
             @click="handleRowClick(item)"
           >
-            <td 
-              v-for="column in columns" 
+            <td
+              v-for="column in columns"
               :key="column.key"
               class="table-cell"
               :class="`text-${column.align || 'start'}`"
             >
               <div class="cell-content">
-                <slot 
-                  :name="`item.${column.key}`" 
-                  :item="item" 
+                <slot
+                  :item="item"
+                  :name="`item.${column.key}`"
                   :value="item[column.key]"
                 >
                   <span class="cell-text">{{ item[column.key] }}</span>
@@ -108,14 +108,14 @@ const isActionDisabled = (action: TableAction, item: any) => {
                 <template v-for="action in actions" :key="action.label">
                   <v-btn
                     v-if="isActionVisible(action, item)"
-                    :color="action.color || 'primary'"
-                    :variant="action.variant || 'tonal'"
-                    :prepend-icon="action.icon"
-                    :disabled="isActionDisabled(action, item)"
-                    @click.stop="handleAction(action, item)"
                     class="action-btn"
-                    size="small"
+                    :color="action.color || 'primary'"
+                    :disabled="isActionDisabled(action, item)"
+                    :prepend-icon="action.icon"
                     rounded="lg"
+                    size="small"
+                    :variant="action.variant || 'tonal'"
+                    @click.stop="handleAction(action, item)"
                   >
                     {{ action.label }}
                   </v-btn>
@@ -125,10 +125,10 @@ const isActionDisabled = (action: TableAction, item: any) => {
           </tr>
         </tbody>
       </v-table>
-      
+
       <!-- Empty State -->
       <div v-if="!loading && items.length === 0" class="empty-state">
-        <v-icon size="64" color="grey-lighten-1" class="mb-4">
+        <v-icon class="mb-4" color="grey-lighten-1" size="64">
           mdi-table-remove
         </v-icon>
         <h3 class="text-h6 text-grey-darken-1 mb-2">No Data Available</h3>
@@ -288,20 +288,20 @@ const isActionDisabled = (action: TableAction, item: any) => {
   .table-cell {
     padding: 12px 16px !important;
   }
-  
+
   .header-text {
     font-size: 0.7rem;
   }
-  
+
   .cell-text {
     font-size: 0.8rem;
   }
-  
+
   .actions-container {
     flex-direction: column;
     gap: 4px;
   }
-  
+
   .action-btn {
     width: 100%;
     min-width: 80px;
@@ -313,7 +313,7 @@ const isActionDisabled = (action: TableAction, item: any) => {
     margin: 0 -8px;
     border-radius: 0;
   }
-  
+
   .header-cell,
   .table-cell {
     padding: 8px 12px !important;
@@ -326,32 +326,32 @@ const isActionDisabled = (action: TableAction, item: any) => {
     background: rgba(18, 18, 18, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .table-header {
     background: linear-gradient(135deg, rgba(25, 118, 210, 0.15) 0%, rgba(33, 150, 243, 0.08) 100%);
     border-bottom: 2px solid rgba(25, 118, 210, 0.2);
   }
-  
+
   .header-cell {
     color: rgba(255, 255, 255, 0.9) !important;
   }
-  
+
   .table-row {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .table-row:hover {
     background: rgba(25, 118, 210, 0.08);
   }
-  
+
   .even-row {
     background: rgba(255, 255, 255, 0.02);
   }
-  
+
   .cell-text {
     color: rgba(255, 255, 255, 0.87);
   }
-  
+
   .empty-state {
     background: rgba(255, 255, 255, 0.02);
   }

@@ -1,7 +1,7 @@
 interface UpdateTicket {
-  name: string;
-  description: string;
-  destination: string;
-  time: Date;
+  name: string
+  description: string
+  destination: string
+  time: Date
 }
-export type { UpdateTicket };
+export type { UpdateTicket }

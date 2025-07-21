@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { APP_ROUTE_NAMES } from '@/constants/routeNames'
-import { useUserStore } from '@/stores/userStore'
+  import { onMounted, ref } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { APP_ROUTE_NAMES } from '@/constants/routeNames'
+  import { useUserStore } from '@/stores/userStore'
 
-const router = useRouter()
-const userStore = useUserStore()
+  const router = useRouter()
+  const userStore = useUserStore()
 
-const goToTickets = () => router.push(APP_ROUTE_NAMES.TICKETS)
-const goToReservations = () => router.push(APP_ROUTE_NAMES.RESERVATION)
+  const goToTickets = () => router.push(APP_ROUTE_NAMES.TICKETS)
+  const goToReservations = () => router.push(APP_ROUTE_NAMES.RESERVATION)
 
-onMounted(async () => {
-  await userStore.updateUserTicketCount()
-})
+  onMounted(async () => {
+    await userStore.updateUserTicketCount()
+  })
 </script>
 
 <template>
   <v-app-bar
+    class="px-4"
     color="primary"
     dark
     elevation="3"
     height="64"
-    class="px-4"
   >
     <!-- Brand Section -->
     <div class="d-flex align-center">
       <v-avatar
+        class="mr-3"
         color="white"
         size="40"
-        class="mr-3"
       >
         <v-icon color="primary" size="24">mdi-ticket-account</v-icon>
       </v-avatar>
@@ -42,18 +42,18 @@ onMounted(async () => {
     <!-- Navigation Buttons -->
     <div class="d-flex align-center ga-2 mr-6">
       <v-btn
+        class="text-white"
         variant="text"
         @click="goToTickets"
-        class="text-white"
       >
         <v-icon class="mr-2">mdi-ticket</v-icon>
         Tickets
       </v-btn>
-      
+
       <v-btn
+        class="text-white"
         variant="text"
         @click="goToReservations"
-        class="text-white"
       >
         <v-icon class="mr-2">mdi-calendar-check</v-icon>
         Reservations
@@ -65,12 +65,12 @@ onMounted(async () => {
       <!-- User Profile -->
       <div class="d-flex align-center">
         <v-avatar
-          size="36"
           class="mr-3"
+          size="36"
         >
           <v-icon color="white">mdi-account-circle</v-icon>
         </v-avatar>
-        
+
         <div class="d-flex flex-column">
           <span class="text-white font-weight-medium text-body-2">
             {{ userStore.user.name }}

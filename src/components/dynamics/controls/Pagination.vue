@@ -4,23 +4,23 @@
   const props = defineProps({
     length: {
       type: Number,
-      default: 15
+      default: 15,
     },
     totalVisible: {
       type: Number,
-      default: 7
-    }
+      default: 7,
+    },
   })
   const page = ref(1)
-  
-  const emit = defineEmits<{
-  (e: 'page-change', value: number): void
-}>()
 
-watch(page, (newPage) => {
-  emit('page-change', newPage)
-})
-  
+  const emit = defineEmits<{
+    (e: 'page-change', value: number): void
+  }>()
+
+  watch(page, newPage => {
+    emit('page-change', newPage)
+  })
+
 </script>
 
 <template>
@@ -29,6 +29,6 @@ watch(page, (newPage) => {
       v-model="page"
       :length="props.length"
       :total-visible="props.totalVisible"
-    ></v-pagination>
+    />
   </div>
 </template>

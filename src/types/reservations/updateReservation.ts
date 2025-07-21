@@ -1,5 +1,5 @@
 interface UpdateReservation {
-  ticketId: string;
-  userId: string;
+  ticketId: string
+  userId: string
 }
-export type { UpdateReservation };
+export type { UpdateReservation }

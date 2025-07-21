@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+  import { defineEmits, defineProps } from 'vue'
 
-export interface Field {
-  label: string;
-  key: string;
-  type: 'text' | 'number' | 'email' | 'date' | 'textarea' | 'select';
-  placeholder?: string;
-  counter?: number;
-  options?: Array<{ label: string; value: string | number }>;
-}
+  export interface Field {
+    label: string
+    key: string
+    type: 'text' | 'number' | 'email' | 'date' | 'textarea' | 'select'
+    placeholder?: string
+    counter?: number
+    options?: Array<{ label: string, value: string | number }>
+  }
 
-const props = defineProps<{
-  schema: Field[];
-  modelValue: Record<string, any>;
-}>();
+  const props = defineProps<{
+    schema: Field[]
+    modelValue: Record<string, any>
+  }>()
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: Record<string, any>): void;
-  (e: 'submit', value: Record<string, any>): void;
-}>();
+  const emit = defineEmits<{
+    (e: 'update:modelValue', value: Record<string, any>): void
+    (e: 'submit', value: Record<string, any>): void
+  }>()
 
-function updateField(key: string, value: any) {
-  const updated = { ...props.modelValue, [key]: value };
-  emit('update:modelValue', updated);
-}
+  function updateField (key: string, value: any) {
+    const updated = { ...props.modelValue, [key]: value }
+    emit('update:modelValue', updated)
+  }
 
-function handleSubmit() {
-  emit('submit', props.modelValue);
-}
+  function handleSubmit () {
+    emit('submit', props.modelValue)
+  }
 </script>
 
 <template>
@@ -37,11 +37,11 @@ function handleSubmit() {
         v-if="field.type !== 'select' && field.type !== 'textarea'"
         v-model="props.modelValue[field.key]"
         :label="field.label"
-        :type="field.type"
         :placeholder="field.placeholder || ''"
+        :type="field.type"
         @update:model-value="(value) => updateField(field.key, value)"
       />
-      
+
       <v-textarea
         v-else-if="field.type === 'textarea'"
         v-model="props.modelValue[field.key]"
@@ -49,14 +49,14 @@ function handleSubmit() {
         :placeholder="field.placeholder || ''"
         @update:model-value="(value) => updateField(field.key, value)"
       />
-      
+
       <v-select
         v-else-if="field.type === 'select'"
         v-model="props.modelValue[field.key]"
-        :label="field.label"
-        :items="field.options"
         item-title="label"
         item-value="value"
+        :items="field.options"
+        :label="field.label"
         :placeholder="field.placeholder || ''"
         @update:model-value="(value) => updateField(field.key, value)"
       />
