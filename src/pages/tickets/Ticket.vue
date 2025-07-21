@@ -10,7 +10,7 @@
   const { response, loading, error, getList, remove } = useTickets()
 
   const createDialog = ref(false)
-  const pageSize = 10
+  const pageSize = 5
   const totalPages = ref(1)
   const updateDialog = ref(false)
   const selectedTicket = ref<Ticket | null>(null)
@@ -41,12 +41,12 @@
     await getList({ _page: page, _per_page: pageSize })
   }
 
-    const openUpdateDialog = (ticket: Ticket) => {
+  const openUpdateDialog = (ticket: Ticket) => {
     selectedTicket.value = ticket
     updateDialog.value = true
   }
 
-    const openCreateDialog = () => {
+  const openCreateDialog = () => {
     createDialog.value = true
   }
 
@@ -58,13 +58,13 @@
 
   onMounted(async () => {
     loading.value = true
-    await getList()
+    await getList({ _page: 1, _per_page: pageSize })
     totalPages.value = response.value?.pages ?? 1
   })
 </script>
 
 <template>
-  <v-container fluid>
+  <v-container class="pa-4" fluid>
     <v-row class="align-center pb-4">
       <v-col>
         <v-btn @click="openCreateDialog">Add ticket</v-btn>

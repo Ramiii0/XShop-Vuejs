@@ -10,7 +10,12 @@
 </script>
 
 <template>
-  <v-footer class="d-flex align-center justify-center ga-2 flex-wrap flex-grow-1 py-3" color="surface">
+  <v-footer
+    app
+    class="d-flex align-center justify-center ga-2 flex-wrap py-3"
+    color="surface"
+    height="auto"
+  >
     <v-btn
       v-for="link in links"
       :key="link"
@@ -20,7 +25,7 @@
     />
 
     <div class="flex-1-0-100 text-center mt-2">
-      {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+      {{ new Date().getFullYear() }} — <strong>X Shop</strong>
     </div>
   </v-footer>
 </template>

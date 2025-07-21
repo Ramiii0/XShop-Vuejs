@@ -20,7 +20,6 @@
   const { create } = useReservations()
   const localDialog = ref(props.dialog)
 
-
   const reservationSchema = computed((): Field[] => [
     {
       label: 'Ticket ID',
@@ -54,7 +53,7 @@
     userId: '',
   })
 
-    watch(() => props.dialog, newVal => {
+  watch(() => props.dialog, newVal => {
     localDialog.value = newVal
   })
 
@@ -66,7 +65,6 @@
     localDialog.value = false
   }
 
-  
   const getReservationPayload = (): CreateReservation => {
     return {
       ticketId: reservation.value.ticketId || '',
@@ -78,7 +76,6 @@
     await create(getReservationPayload())
     closeDialog()
   }
-
 
   onMounted(() => {
     getTicketsList()

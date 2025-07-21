@@ -71,7 +71,7 @@
     }
   }
 
-    watch(() => props.dialog, newVal => {
+  watch(() => props.dialog, newVal => {
     localDialog.value = newVal
   })
 

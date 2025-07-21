@@ -39,10 +39,9 @@
     getList({
       search: searchValue,
     })
-
   }
 
-    const openUpdateDialog = (reservation: Reservation) => {
+  const openUpdateDialog = (reservation: Reservation) => {
     selectedReservation.value = reservation
     updateDialog.value = true
   }
@@ -56,6 +55,7 @@
   }
 
   onMounted(async () => {
+    loading.value = true
     await getList({ _page: 1, _per_page: pageSize })
     totalPages.value = response.value?.pages ?? 1
   })

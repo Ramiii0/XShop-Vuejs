@@ -32,6 +32,26 @@
   const isActionDisabled = (action: TableAction, item: any) => {
     return action.disabled ? action.disabled(item) : false
   }
+
+  const formatValue = (value: any) => {
+    // Check if the value is a date/datetime
+    if (value instanceof Date) {
+      return value.toLocaleDateString()
+    }
+
+    // Check if the value is a date string
+    if (typeof value === 'string') {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/
+      if (dateRegex.test(value)) {
+        const date = new Date(value)
+        if (!isNaN(date.getTime())) {
+          return date.toLocaleDateString()
+        }
+      }
+    }
+
+    return value
+  }
 </script>
 
 <template>
@@ -65,13 +85,6 @@
             >
               <div class="header-content">
                 <span class="header-text">{{ column.label }}</span>
-                <v-icon
-                  v-if="column.sortable"
-                  class="sort-icon ml-1"
-                  size="small"
-                >
-                  mdi-sort
-                </v-icon>
               </div>
             </th>
             <th v-if="actions && actions.length > 0" class="header-cell text-center">
@@ -99,7 +112,7 @@
                   :name="`item.${column.key}`"
                   :value="item[column.key]"
                 >
-                  <span class="cell-text">{{ item[column.key] }}</span>
+                  <span class="cell-text">{{ formatValue(item[column.key]) }}</span>
                 </slot>
               </div>
             </td>
@@ -193,15 +206,6 @@
 
 .sortable-header:hover {
   background: rgba(25, 118, 210, 0.08);
-}
-
-.sort-icon {
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
-}
-
-.sortable-header:hover .sort-icon {
-  opacity: 1;
 }
 
 /* Row Styles */
