@@ -23,6 +23,36 @@ Set up your project using your preferred package manager. Use the corresponding 
 
 After completing the installation, your environment is ready for Vuetify development.
 
+## 🗄️ Backend Setup
+
+This project uses json-server to provide a fake REST API for development. You need to run the json-server alongside the Vue application.
+
+### Starting the JSON Server
+
+Before starting the Vue development server, you need to start the json-server to provide the backend API:
+
+```bash
+npx json-server --watch db.json
+```
+
+This will start the json-server on the default port (usually 3000) and watch the `db.json` file for changes. The server provides REST endpoints for the data defined in `db.json`.
+
+### Running Both Servers
+
+For full development, you'll need to run both servers:
+
+1. **Terminal 1** - Start the JSON server:
+   ```bash
+   npx json-server --watch db.json
+   ```
+
+2. **Terminal 2** - Start the Vue development server:
+   ```bash
+   npm run dev
+   ```
+
+The Vue application will be available at [http://localhost:4000](http://localhost:4000) and will communicate with the json-server API.
+
 ## ✨ Features
 
 - 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
@@ -41,7 +71,9 @@ This section covers how to start the development server and build your project f
 
 ### Starting the Development Server
 
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
+To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:4000](http://localhost:4000):
+
+**Note**: Make sure you have already started the json-server (see Backend Setup section above) before starting the Vue development server.
 
 ```bash
 yarn dev
