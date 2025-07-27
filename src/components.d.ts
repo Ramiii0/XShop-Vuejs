@@ -8,20 +8,17 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    CreateForm: typeof import('./components/CreateForm.vue')['default']
+    BaseTablePage: typeof import('./components/dynamics/tables/BaseTablePage.vue')['default']
     CreateReservation: typeof import('./components/reservations/CreateReservation.vue')['default']
     CreateTicket: typeof import('./components/tickets/CreateTicket.vue')['default']
     DynamicForm: typeof import('./components/dynamics/forms/DynamicForm.vue')['default']
     DynamicTable: typeof import('./components/dynamics/tables/DynamicTable.vue')['default']
-    DynamicTicketForm: typeof import('./components/tickets/DynamicTicketForm.vue')['default']
     Footer: typeof import('./components/layouts/Footer.vue')['default']
     Header: typeof import('./components/layouts/Header.vue')['default']
     Pagination: typeof import('./components/dynamics/controls/Pagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchInputField: typeof import('./components/dynamics/controls/SearchInputField.vue')['default']
-    TestDynamic: typeof import('./components/tickets/testDynamic.vue')['default']
-    TestDynamicTicket: typeof import('./components/tickets/testDynamicTicket.vue')['default']
     Ticket: typeof import('./components/tickets/Ticket.vue')['default']
     UpdateReservation: typeof import('./components/reservations/UpdateReservation.vue')['default']
     UpdateTicket: typeof import('./components/tickets/UpdateTicket.vue')['default']
