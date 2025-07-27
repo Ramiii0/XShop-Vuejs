@@ -64,9 +64,9 @@
 </script>
 
 <template>
-  <v-container class="pa-4" fluid>
-    <v-row class="align-center pb-4">
-      <v-col>
+
+<BaseTablePage>
+  <template v-slot:ActionButtons>
         <v-btn @click="openCreateDialog">Add ticket</v-btn>
         <CreateTicket
           v-if="createDialog"
@@ -77,14 +77,13 @@
           v-model:dialog="updateDialog"
           :ticket-data="selectedTicket"
         />
-      </v-col>
-      <v-spacer />
-      <v-col>
-        <SearchInputField @search="onSearch" />
-      </v-col>
+  </template>
 
-    </v-row>
+  <template v-slot:SearchInput>
+    <SearchInputField @search="onSearch" />
+  </template>
 
+  <template v-slot:Table>
     <DynamicTable
       :actions="tableActions"
       :columns="tableColumns"
@@ -93,11 +92,15 @@
       key-field="id"
       :loading="loading"
     />
+  </template>
+
+  <template v-slot:Pagination>
     <Pagination
       :length="totalPages"
       :total-visible="10"
       @page-change="fetchTickets"
     />
+  </template>
 
-  </v-container>
+</BaseTablePage>
 </template>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import type { TableAction, TableColumn } from '@/types/common/table'
   import type { Reservation } from '@/types/reservations/reservation'
-  import { onMounted, reactive, ref } from 'vue'
+  import { onMounted, ref } from 'vue'
   import DynamicTable from '@/components/dynamics/tables/DynamicTable.vue'
   import CreateReservation from '@/components/reservations/CreateReservation.vue'
   import UpdateReservation from '@/components/reservations/UpdateReservation.vue'
@@ -62,40 +62,41 @@
 </script>
 
 <template>
-  <v-container fluid>
-    <v-row class="align-center pb-4">
-      <v-col>
-        <v-btn @click="openCreateDialog">Add reservation</v-btn>
-        <CreateReservation
-          v-if="createDialog"
-          v-model:dialog="createDialog"
-        />
-        <UpdateReservation
-          v-if="updateDialog && selectedReservation"
-          v-model:dialog="updateDialog"
-          :reservation-data="selectedReservation"
-        />
-      </v-col>
-      <v-spacer />
-      <v-col>
-        <SearchInputField @search="onSearch" />
-      </v-col>
+  <BaseTablePage>
+    <template v-slot:ActionButtons>
+      <v-btn @click="openCreateDialog">Add reservation</v-btn>
+      <CreateReservation
+        v-if="createDialog"
+        v-model:dialog="createDialog"
+      />
+      <UpdateReservation
+        v-if="updateDialog && selectedReservation"
+        v-model:dialog="updateDialog"
+        :reservation-data="selectedReservation"
+      />
+    </template>
 
-    </v-row>
+    <template v-slot:SearchInput>
+      <SearchInputField @search="onSearch" />
+    </template>
 
-    <DynamicTable
-      :actions="tableActions"
-      :columns="tableColumns"
-      hover
-      :items="response?.data || []"
-      key-field="id"
-      :loading="loading"
-    />
-    <Pagination
-      :length="totalPages"
-      :total-visible="10"
-      @page-change="fetchReservations"
-    />
+    <template v-slot:Table>
+      <DynamicTable
+        :actions="tableActions"
+        :columns="tableColumns"
+        hover
+        :items="response?.data || []"
+        key-field="id"
+        :loading="loading"
+      />
+    </template>
 
-  </v-container>
+    <template v-slot:Pagination>
+      <Pagination
+        :length="totalPages"
+        :total-visible="10"
+        @page-change="fetchReservations"
+      />
+    </template>
+  </BaseTablePage>
 </template>
